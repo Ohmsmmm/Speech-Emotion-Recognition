@@ -1,4 +1,8 @@
 # For Windows Error
-![test](./requrementWins.png)
+![requrementWins](./requirementWin.jpg)
+## for [pyAudio](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
+
+<br>
+
 # Reference
 [How to Make a Speech Emotion Recognizer Using Python And Scikit-learn](https://www.thepythoncode.com/article/building-a-speech-emotion-recognizer-using-sklearn)

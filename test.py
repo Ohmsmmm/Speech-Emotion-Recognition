@@ -6,14 +6,20 @@ from sys import byteorder
 from array import array
 from struct import pack
 from sklearn.neural_network import MLPClassifier
-
 from utils import extract_feature
+from tkinter import *
+
+window = Tk()
+
+window.title("Speech-Emotion-Recognition")
+
+window.geometry('350x255')
+
 
 THRESHOLD = 500
 CHUNK_SIZE = 1024
 FORMAT = pyaudio.paInt16
 RATE = 16000
-
 SILENCE = 30
 
 def is_silent(snd_data):
@@ -120,19 +126,43 @@ def record_to_file(path):
     wf.writeframes(data)
     wf.close()
 
-
-
-if __name__ == "__main__":
-    # load the saved model (after training)
-    model = pickle.load(open("result/mlp_classifier.model", "rb"))
+# if __name__ == "__main__":
+def speak():
+    lbl.config(text="Record Complete")
     print("Please talk")
     filename = "test.wav"
     # record the file (start talking)
     record_to_file(filename)
+
+def predictSpeech():
+    # load the saved model (after training)
+    model = pickle.load(open("result/mlp_classifier.model", "rb"))
     # extract features and reshape it
-    features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+    features = extract_feature(file_name="test.wav", mfcc=True, chroma=True, mel=True).reshape(1, -1)
     # predict
     result = model.predict(features)[0]
     # show the result !
     print("result:", result)
-    
+    lbl2.config(text=result)
+
+def resetLabel():
+    lbl.config(text= "Click to talk")
+    lbl2.config(text= "Result")
+
+# GUI
+lbl = Label(window, text="Click to talk")
+lbl.grid(column=2, row=0)
+
+lbl2 = Label(window, text="Result")
+lbl2.grid(column=2, row=1)
+
+btn1 = Button(window, text="Record", command=speak, height= 5, width=10)
+btn1.grid(column=1, row=0)
+
+btn2 = Button(window, text="Predict", command=predictSpeech, height= 5, width=10)
+btn2.grid(column=1, row=1)
+
+btn3 = Button(window, text="Reset", command=resetLabel, height= 5, width=10)
+btn3.grid(column=1, row=2)
+
+window.mainloop()

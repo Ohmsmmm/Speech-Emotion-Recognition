@@ -1,3 +1,5 @@
+from multiprocessing import Process
+import os
 from flask import Flask, render_template
 from test import predictSpeech
 app = Flask(__name__)
@@ -14,4 +16,4 @@ def SER():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='localhost', port=80)
+    app.run(host='127.0.0.1', port=8000)

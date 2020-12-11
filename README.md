@@ -1,6 +1,8 @@
 # For Windows Error
 ![requrementWins](./requirementWin.jpg)
 ## for [pyAudio](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
+## for No module named 'numba.decorators'
+use pip install numba==0.48
 
 <br>
 
